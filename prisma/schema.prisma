@@ -16,4 +16,18 @@ model Post {
   body      String
   createdAt DateTime
   updatedAt DateTime  @updatedAt
+  postInfo  PostInfo?
+}
+
+model PostInfo {
+  id     Int   @id @default(autoincrement())
+  tags   Tag[]
+  postId Int   @unique
+  post   Post  @relation(fields: [postId], references: [id])
+}
+
+model Tag {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  postInfos PostInfo[]
 }
